@@ -32,7 +32,7 @@
 
 ```bash
 # 1. Clone 專案
-git clone <your-repo-url>
+git clone https://github.com/m121752332/DualCalc.git
 cd DualCalc
 
 # 2. 用 Visual Studio 2022 開啟

@@ -52,12 +52,17 @@ namespace DualCalc.Services
         {
             if (_rootElement == null) return;
 
-            _rootElement.RequestedTheme = _theme switch
+            var newTheme = _theme switch
             {
                 AppTheme.Light  => ElementTheme.Light,
                 AppTheme.Dark   => ElementTheme.Dark,
                 _               => ElementTheme.Default  // follows system
             };
+
+            if (_rootElement.RequestedTheme != newTheme)
+            {
+                _rootElement.RequestedTheme = newTheme;
+            }
         }
 
         // ── Persistence ───────────────────────────────────────

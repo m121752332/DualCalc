@@ -26,6 +26,9 @@ namespace DualCalc
             // Theme service init
             ThemeService.Instance.Initialize((FrameworkElement)this.Content);
 
+            // Re-apply if it loaded before content was ready
+            this.Activated += (s, e) => ThemeService.Instance.Apply();
+            
             // Notify DualColumnWidth when IsDualMode changes
             ViewModel.PropertyChanged += (_, e) =>
             {
