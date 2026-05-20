@@ -15,8 +15,6 @@
         <Style x:Key="CalcButtonStyle" TargetType="Button">
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontWeight" Value="Normal"/>
-            <Setter Property="Background" Value="#3D3D3D"/>
-            <Setter Property="Foreground" Value="White"/>
             <Setter Property="CornerRadius" Value="4"/>
             <Setter Property="Margin" Value="1"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -25,22 +23,16 @@
         </Style>
 
         <Style x:Key="FuncButtonStyle" TargetType="Button" BasedOn="{StaticResource CalcButtonStyle}">
-            <Setter Property="Background" Value="#333333"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
 
-        <Style x:Key="OpButtonStyle" TargetType="Button" BasedOn="{StaticResource CalcButtonStyle}">
-            <Setter Property="Background" Value="#333333"/>
-        </Style>
+        <Style x:Key="OpButtonStyle" TargetType="Button" BasedOn="{StaticResource CalcButtonStyle}"/>
 
-        <Style x:Key="EqualsButtonStyle" TargetType="Button" BasedOn="{StaticResource CalcButtonStyle}">
-            <Setter Property="Background" Value="#0078D4"/>
-        </Style>
+        <Style x:Key="EqualsButtonStyle" TargetType="Button" BasedOn="{StaticResource CalcButtonStyle}"/>
 
         <Style x:Key="MemButtonStyle" TargetType="Button">
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="#AAAAAA"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Margin" Value="0"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -49,7 +41,7 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid Background="#1C1C1C" RowSpacing="0">
+    <Grid RowSpacing="0">
         <Grid.RowDefinitions>
             <!-- Label row (A / B) -->
             <RowDefinition Height="28"/>
@@ -72,7 +64,6 @@
         <!-- ── Label ── -->
         <TextBlock Grid.Row="0"
                    Text="{x:Bind ViewModel.Label}"
-                   Foreground="#666666"
                    FontSize="12"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Center"
@@ -81,7 +72,6 @@
         <!-- ── Expression ── -->
         <TextBlock Grid.Row="1"
                    Text="{x:Bind ViewModel.Expression, Mode=OneWay}"
-                   Foreground="#888888"
                    FontSize="13"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Center"
@@ -91,7 +81,6 @@
         <!-- ── Main Display ── -->
         <TextBlock Grid.Row="2"
                    Text="{x:Bind ViewModel.Display, Mode=OneWay}"
-                   Foreground="White"
                    FontSize="40"
                    FontWeight="Light"
                    HorizontalAlignment="Right"

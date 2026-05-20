@@ -73,8 +73,8 @@ DualCalc/
 
 | 層 | 技術 |
 | ---- | ------ |
-| **前端** | WinUI 3 / Windows App SDK 1.5 |
-| **後端** | C# 12 / .NET 8 |
+| **前端** | WinUI 3 / Windows App SDK 2.0 |
+| **後端** | C# 12 / .NET 10 |
 | **架構** | MVVM + x:Bind |
 | **計算引擎** | Shunting-yard Algorithm |
 | **主題** | Mica Backdrop + ElementTheme |
