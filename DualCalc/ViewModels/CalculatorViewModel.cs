@@ -77,8 +77,12 @@ namespace DualCalc.ViewModels
             }
         }
 
-        public CalculatorViewModel(CalculatorIdentifier identifier = CalculatorIdentifier.Single) 
-        { 
+        public int ButtonFontSize => DualCalc.Services.ConfigService.Instance.Calc.DefaultButtonFontSize;
+        public int FuncButtonFontSize => DualCalc.Services.ConfigService.Instance.Calc.DefaultFuncButtonFontSize;
+        public int MemButtonFontSize => DualCalc.Services.ConfigService.Instance.Calc.DefaultMemButtonFontSize;
+
+        public CalculatorViewModel(CalculatorIdentifier identifier = CalculatorIdentifier.Single)
+        {
             _identifier = identifier; 
 
             // Listen for language changes to update label translated text

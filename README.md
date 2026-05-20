@@ -18,7 +18,7 @@
 | 工具 | 版本 |
 | ------ | ------ |
 | Visual Studio | 2026 18.5+ |
-| Windows App SDK | 1.5+ |
+| Windows App SDK | 2.0+ |
 | .NET | 10.0 |
 | Windows | 10 1809 (build 17763)+ |
 

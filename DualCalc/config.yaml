@@ -19,6 +19,21 @@ calc:
   # default:true
   isDualModeOnStartup: true
 
+  # Default font size for calculator buttons.
+  # 計算機按鈕的預設字體大小。
+  # default:18
+  defaultButtonFontSize: 24
+
+  # Default font size for calculator function buttons (e.g. 1/x, x², %, CE, C, ⌫).
+  # 計算機功能按鈕的預設字體大小 (例如 1/x, x², %, CE, C, ⌫)。
+  # default:14
+  defaultFuncButtonFontSize: 24
+
+  # Default font size for calculator memory buttons (e.g. MC, MR, M+, M-, MS).
+  # 計算機記憶體按鈕的預設字體大小 (例如 MC, MR, M+, M-, MS)。
+  # default:12
+  defaultMemButtonFontSize: 14
+
 # Setting Configuration (全域設定)
 setting:
   # Default Language: 'zh-Hant' or 'zh-Hans'

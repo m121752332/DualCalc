@@ -14,6 +14,15 @@
     <WindowsPackageType>None</WindowsPackageType>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefaultLanguage>zh-Hant</DefaultLanguage>
+
+    <!-- 瘦身選項：建置為單一檔案 -->
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <!-- 瘦身選項：啟用剪裁機制移除未使用的框架程式碼 -->
+    <PublishTrimmed>true</PublishTrimmed>
+    <!-- 調整剪裁模式為 partial 以避免使用反射（如 WinUI 或 YamlDotNet）時找不到物件 -->
+    <TrimMode>partial</TrimMode>
+    <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,8 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PRIResource Include="Strings\zh-Hant\Resources.resw" />
-    <PRIResource Include="Strings\zh-Hans\Resources.resw" />
   </ItemGroup>
 
   <ItemGroup>

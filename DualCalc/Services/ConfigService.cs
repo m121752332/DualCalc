@@ -13,8 +13,11 @@ namespace DualCalc.Services
     public class CalcConfig
     {
         public int DefaultAppWidth { get; set; } = 380;
-        public int DefaultAppHeight { get; set; } = 620;
+        public int DefaultAppHeight { get; set; } = 700;
         public bool IsDualModeOnStartup { get; set; } = true;
+        public int DefaultButtonFontSize { get; set; } = 18;
+        public int DefaultFuncButtonFontSize { get; set; } = 14;
+        public int DefaultMemButtonFontSize { get; set; } = 12;
     }
 
     public class SettingConfig
