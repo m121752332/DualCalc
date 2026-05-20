@@ -6,8 +6,8 @@ namespace DualCalc.ViewModels
     public class MainViewModel : INotifyPropertyChanged
     {
         // ── Two calculator instances ──────────────────────────
-        public CalculatorViewModel CalcA { get; } = new("A");
-        public CalculatorViewModel CalcB { get; } = new("B");
+        public CalculatorViewModel CalcA { get; } = new(CalculatorIdentifier.Left);
+        public CalculatorViewModel CalcB { get; } = new(CalculatorIdentifier.Right);
 
         public MainViewModel()
         {
@@ -18,7 +18,7 @@ namespace DualCalc.ViewModels
         }
 
         // ── Dual mode toggle ──────────────────────────────────
-        private bool _isDualMode = true;
+        private bool _isDualMode = DualCalc.Services.ConfigService.Instance.Calc.IsDualModeOnStartup;
         public bool IsDualMode
         {
             get => _isDualMode;
@@ -26,14 +26,34 @@ namespace DualCalc.ViewModels
             {
                 if (_isDualMode == value) return;
                 _isDualMode = value;
+
+                // Update identifiers to refresh labels depending on dual mode state
+                if (_isDualMode)
+                {
+                    CalcA.Identifier = CalculatorIdentifier.Left;
+                    CalcB.Identifier = CalculatorIdentifier.Right;
+                }
+                else
+                {
+                    CalcA.Identifier = CalculatorIdentifier.Single;
+                }
+
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(DualModeIcon));
                 OnPropertyChanged(nameof(DualModeTooltip));
+                OnPropertyChanged(nameof(DualModeToggleBackground));
             }
         }
 
         public string DualModeIcon    => _isDualMode ? "\uE923" : "\uE922"; // WinUI grid icons
-        public string DualModeTooltip => _isDualMode ? DualCalc.Services.LocalizationService.Instance.DualMode_Toggle : DualCalc.Services.LocalizationService.Instance.DualMode_Toggle; 
+        public string DualModeTooltip => _isDualMode 
+            ? DualCalc.Services.LocalizationService.Instance.DualMode_Toggle_Dual 
+            : DualCalc.Services.LocalizationService.Instance.DualMode_Toggle_Single; 
+
+        // Button dynamic coloring based on dual mode 
+        public Microsoft.UI.Xaml.Media.SolidColorBrush DualModeToggleBackground => _isDualMode 
+            ? new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Transparent) // Default background for transparent 
+            : new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.SeaGreen); 
 
         public void ToggleDualMode() => IsDualMode = !IsDualMode;
 

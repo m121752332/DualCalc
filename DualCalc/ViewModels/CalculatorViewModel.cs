@@ -5,6 +5,13 @@ using DualCalc.Models;
 
 namespace DualCalc.ViewModels
 {
+    public enum CalculatorIdentifier
+    {
+        Single,
+        Left,
+        Right
+    }
+
     /// <summary>
     /// 單一計算機的完整狀態與邏輯
     /// </summary>
@@ -42,8 +49,44 @@ namespace DualCalc.ViewModels
         }
 
         // ── Calculator Label (A or B) ─────────────────────────
-        public string Label { get; }
-        public CalculatorViewModel(string label = "A") { Label = label; }
+        private CalculatorIdentifier _identifier;
+        public CalculatorIdentifier Identifier
+        {
+            get => _identifier;
+            set
+            {
+                if (_identifier != value)
+                {
+                    _identifier = value;
+                    OnPropertyChanged(nameof(Label));
+                }
+            }
+        }
+
+        public string Label
+        {
+            get
+            {
+                return _identifier switch
+                {
+                    CalculatorIdentifier.Left => DualCalc.Services.LocalizationService.Instance.Calc_Label_Left,
+                    CalculatorIdentifier.Right => DualCalc.Services.LocalizationService.Instance.Calc_Label_Right,
+                    CalculatorIdentifier.Single => DualCalc.Services.LocalizationService.Instance.Calc_Label_Single,
+                    _ => "",
+                };
+            }
+        }
+
+        public CalculatorViewModel(CalculatorIdentifier identifier = CalculatorIdentifier.Single) 
+        { 
+            _identifier = identifier; 
+
+            // Listen for language changes to update label translated text
+            DualCalc.Services.LocalizationService.Instance.LanguageChanged += (_, _) =>
+            {
+                OnPropertyChanged(nameof(Label));
+            };
+        }
 
         // ─────────────────────────────────────────────────────
         // Button Commands

@@ -96,7 +96,6 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Content="MC" Style="{StaticResource MemButtonStyle}"
                     Click="OnMemoryClear"
@@ -110,7 +109,6 @@
                     Click="OnMemorySubtract"/>
             <Button Grid.Column="4" Content="MS" Style="{StaticResource MemButtonStyle}"
                     Click="OnMemoryStore"/>
-            <Button Grid.Column="5" Content="M∨" Style="{StaticResource MemButtonStyle}"/>
         </Grid>
 
         <!-- ── Function Row: % CE C ⌫ ── -->

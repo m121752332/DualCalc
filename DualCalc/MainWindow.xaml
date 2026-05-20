@@ -76,14 +76,13 @@
                     <ToggleButton Grid.Column="1"
                                   IsChecked="{x:Bind ViewModel.IsDualMode, Mode=TwoWay}"
                                   ToolTipService.ToolTip="{x:Bind ViewModel.DualModeTooltip, Mode=OneWay}"
+                                  Background="{x:Bind ViewModel.DualModeToggleBackground, Mode=OneWay}"
                                   VerticalAlignment="Center"
                                   Margin="0,0,8,0"
                                   Padding="10,6"
                                   CornerRadius="6">
                         <StackPanel Orientation="Horizontal" Spacing="6">
-                            <TextBlock Text="A" FontWeight="SemiBold" FontSize="13"/>
-                            <TextBlock Text="|" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="13"/>
-                            <TextBlock Text="B" FontWeight="SemiBold" FontSize="13"/>
+                            <TextBlock Text="{x:Bind ViewModel.DualModeTooltip, Mode=OneWay}" FontWeight="SemiBold" FontSize="13"/>
                         </StackPanel>
                     </ToggleButton>
                 </Grid>

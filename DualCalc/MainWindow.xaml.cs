@@ -39,6 +39,18 @@ namespace DualCalc
                     {
                         // Trigger a re-measure by toggling binding
                         OnPropertyChanged(nameof(DualColumnWidth));
+
+                        // Adjust window width when toggling dual mode
+                        var appWidth = ConfigService.Instance.Calc.DefaultAppWidth;
+                        var currentSize = this.AppWindow.Size;
+                        if (ViewModel.IsDualMode)
+                        {
+                            this.AppWindow.Resize(new Windows.Graphics.SizeInt32(appWidth * 2, currentSize.Height));
+                        }
+                        else
+                        {
+                            this.AppWindow.Resize(new Windows.Graphics.SizeInt32(appWidth, currentSize.Height));
+                        }
                     });
             };
 
@@ -58,8 +70,14 @@ namespace DualCalc
             // Select Calculator nav item on load
             NavView.SelectedItem = NavCalc;
 
-            // Window sizing
-            this.AppWindow.Resize(new Windows.Graphics.SizeInt32(380, 620));
+            // Window sizing based on config
+            var appWidth = ConfigService.Instance.Calc.DefaultAppWidth;
+            var appHeight = ConfigService.Instance.Calc.DefaultAppHeight;
+            if (ViewModel.IsDualMode)
+            {
+                appWidth *= 2;
+            }
+            this.AppWindow.Resize(new Windows.Graphics.SizeInt32(appWidth, appHeight));
         }
 
         // ── Navigation ────────────────────────────────────────

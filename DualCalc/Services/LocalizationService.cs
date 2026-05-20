@@ -33,7 +33,11 @@ namespace DualCalc.Services
             ["About_Frontend"] = "前端：WinUI 3 / Windows App SDK",
             ["About_Backend"] = "後端：C# / .NET 10",
             ["About_Copyright"] = "© 2026 DualCalc",
-            ["DualMode_Toggle"] = "雙欄模式",
+            ["DualMode_Toggle_Single"] = "單台計算機",
+            ["DualMode_Toggle_Dual"] = "雙台計算機",
+            ["Calc_Label_Left"] = "左邊計算機",
+            ["Calc_Label_Right"] = "右邊計算機",
+            ["Calc_Label_Single"] = "計算機",
             ["Calc_Memory_Clear"] = "記憶體清除",
             ["Calc_Memory_Recall"] = "記憶體讀取",
             ["Calc_Memory_Add"] = "記憶體加",
@@ -60,7 +64,11 @@ namespace DualCalc.Services
             ["About_Frontend"] = "前端：WinUI 3 / Windows App SDK",
             ["About_Backend"] = "后端：C# / .NET 10",
             ["About_Copyright"] = "© 2026 DualCalc",
-            ["DualMode_Toggle"] = "双栏模式",
+            ["DualMode_Toggle_Single"] = "单台计算器",
+            ["DualMode_Toggle_Dual"] = "双台计算器",
+            ["Calc_Label_Left"] = "左边计算器",
+            ["Calc_Label_Right"] = "右边计算器",
+            ["Calc_Label_Single"] = "计算器",
             ["Calc_Memory_Clear"] = "内存清除",
             ["Calc_Memory_Recall"] = "内存读取",
             ["Calc_Memory_Add"] = "内存加",
@@ -73,6 +81,20 @@ namespace DualCalc.Services
         private LocalizationService()
         {
             Load();
+
+            // Apply config default language if not already saved in user local settings
+            if (!File.Exists(_settingsFile))
+            {
+                var defaultLang = ConfigService.Instance.Setting.Language;
+                if (defaultLang == "zh-Hans")
+                {
+                    _language = AppLanguage.ZhHans;
+                }
+                else
+                {
+                    _language = AppLanguage.ZhHant; // fallback to zh-Hant or config value
+                }
+            }
         }
 
         // ── State ─────────────────────────────────────────────
@@ -122,7 +144,11 @@ namespace DualCalc.Services
         public string About_Frontend    => Get("About_Frontend");
         public string About_Backend     => Get("About_Backend");
         public string About_Copyright   => Get("About_Copyright");
-        public string DualMode_Toggle   => Get("DualMode_Toggle");
+        public string DualMode_Toggle_Single => Get("DualMode_Toggle_Single");
+        public string DualMode_Toggle_Dual   => Get("DualMode_Toggle_Dual");
+        public string Calc_Label_Left   => Get("Calc_Label_Left");
+        public string Calc_Label_Right  => Get("Calc_Label_Right");
+        public string Calc_Label_Single => Get("Calc_Label_Single");
         public string Calc_Memory_Clear => Get("Calc_Memory_Clear");
         public string Calc_Memory_Recall => Get("Calc_Memory_Recall");
         public string Calc_Memory_Add   => Get("Calc_Memory_Add");
@@ -149,7 +175,11 @@ namespace DualCalc.Services
             OnPropertyChanged(nameof(About_Frontend));
             OnPropertyChanged(nameof(About_Backend));
             OnPropertyChanged(nameof(About_Copyright));
-            OnPropertyChanged(nameof(DualMode_Toggle));
+            OnPropertyChanged(nameof(DualMode_Toggle_Single));
+            OnPropertyChanged(nameof(DualMode_Toggle_Dual));
+            OnPropertyChanged(nameof(Calc_Label_Left));
+            OnPropertyChanged(nameof(Calc_Label_Right));
+            OnPropertyChanged(nameof(Calc_Label_Single));
             OnPropertyChanged(nameof(Calc_Memory_Clear));
             OnPropertyChanged(nameof(Calc_Memory_Recall));
             OnPropertyChanged(nameof(Calc_Memory_Add));

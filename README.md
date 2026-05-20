@@ -4,11 +4,12 @@
 
 ## 功能特色
 
-- **雙欄模式**：點擊 Toolbar 上的 `A | B` 開關，即時展開/收起第二個計算機
-- **先乘除後加減**：Shunting-yard 算法，完整支援運算子優先級
-- **繁簡切換**：配置頁即時切換，所有 UI 文字自動連動
-- **三種主題**：系統 / 明亮 / 黑暗，即時生效不需重啟
-- **Memory 功能**：MC / MR / M+ / M− / MS
+- **雙欄模式**：點擊 Toolbar 上的開關，即時展開/收起第二個計算機，並會根據設定自動調整視窗大小，顏色狀態與提示也會動態切換。
+- **配置讀取**：新增 `config.yaml` 支援預設視窗大小與單/雙欄啟動配置，且在配置頁也新增相關對應邏輯。
+- **先乘除後加減**：Shunting-yard 算法，完整支援運算子優先級。
+- **繁簡切換**：配置頁即時切換，所有 UI 文字（包含動態更新的提示）自動連動。
+- **三種主題**：系統 / 明亮 / 黑暗，即時生效不需重啟。
+- **Memory 功能**：MC / MR / M+ / M− / MS。
 
 ---
 
@@ -58,13 +59,15 @@ DualCalc/
 │   ├── SettingsView.xaml        # 配置頁
 │   └── AboutView.xaml           # 關於頁
 ├── Services/
+│   ├── ConfigService.cs         # config.yaml 參數讀取服務
 │   ├── LocalizationService.cs   # 繁簡切換服務
 │   └── ThemeService.cs          # 主題切換服務
 ├── Converters/
 │   └── BoolToVisibilityConverter.cs
-└── Strings/
-    ├── zh-Hant/Resources.resw   # 繁體中文
-    └── zh-Hans/Resources.resw   # 简体中文
+├── Strings/
+│   ├── zh-Hant/Resources.resw   # 繁體中文
+│   └── zh-Hans/Resources.resw   # 简体中文
+└── config.yaml                  # 系統全域應用配置檔
 ```
 
 ---
@@ -79,6 +82,7 @@ DualCalc/
 | **計算引擎** | Shunting-yard Algorithm |
 | **主題** | Mica Backdrop + ElementTheme |
 | **本地化** | .resw ResourceLoader |
+| **配置檔** | YamlDotNet |
 
 ---
 

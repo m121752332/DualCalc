@@ -15,7 +15,22 @@ namespace DualCalc.Services
     {
         // ── Singleton ─────────────────────────────────────────
         public static ThemeService Instance { get; } = new();
-        private ThemeService() { Load(); }
+        private ThemeService()
+        {
+            Load();
+
+            // Apply config default theme if not already saved in user local settings
+            if (!File.Exists(_settingsFile))
+            {
+                var defaultTheme = ConfigService.Instance.Setting.Theme;
+                _theme = defaultTheme switch
+                {
+                    "Light" => AppTheme.Light,
+                    "Dark" => AppTheme.Dark,
+                    _ => AppTheme.System
+                };
+            }
+        }
 
         // ── State ─────────────────────────────────────────────
         private AppTheme _theme = AppTheme.System;

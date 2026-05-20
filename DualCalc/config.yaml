@@ -1,0 +1,27 @@
+# DualCalc Configuration File
+# 雙視窗計算機 全局設定檔
+
+# App Configuration (計算機相關設定)
+calc:
+  # The default width of a single calculator window. 
+  # If Dual Mode is off, window is this wide. If on, window is (this * 2).
+  # 單一區塊的預設寬度。雙開時將會變成預設寬度 * 2。
+  defaultAppWidth: 370
+
+  # The default height of the window.
+  # 視窗的預設高度。
+  defaultAppHeight: 700
+
+  # Default state of Dual Mode on startup.
+  # 啟動時是否預設開啟雙視窗模式。
+  isDualModeOnStartup: true
+
+# Setting Configuration (全域設定)
+setting:
+  # Default Language: 'zh-Hant' or 'zh-Hans'
+  # 預設語系，支援 'zh-Hant' (繁體), 'zh-Hans' (簡體)
+  language: zh-Hant
+
+  # Default Theme: 'Light', 'Dark', or 'System'
+  # 預設主題，支援 'Light', 'Dark', 'System'
+  theme: System
