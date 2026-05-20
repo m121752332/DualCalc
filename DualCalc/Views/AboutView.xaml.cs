@@ -10,6 +10,14 @@ namespace DualCalc.Views
         public AboutView()
         {
             this.InitializeComponent();
+
+            Loc.LanguageChanged += (_, _) =>
+            {
+                DispatcherQueue.TryEnqueue(() =>
+                {
+                    Bindings.Update();
+                });
+            };
         }
     }
 }

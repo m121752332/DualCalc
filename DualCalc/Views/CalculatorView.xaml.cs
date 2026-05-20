@@ -8,16 +8,29 @@ namespace DualCalc.Views
     {
         public CalculatorViewModel ViewModel { get; internal set; }
 
+        private void SetupLanguageChanged()
+        {
+            DualCalc.Services.LocalizationService.Instance.LanguageChanged += (_, _) =>
+            {
+                DispatcherQueue.TryEnqueue(() =>
+                {
+                    Bindings.Update();
+                });
+            };
+        }
+
         public CalculatorView()
         {
             this.InitializeComponent();
             ViewModel = new CalculatorViewModel();
+            this.Loaded += (_,_) => SetupLanguageChanged();
         }
 
         public CalculatorView(CalculatorViewModel vm)
         {
             this.InitializeComponent();
             ViewModel = vm;
+            this.Loaded += (_,_) => SetupLanguageChanged();
         }
 
         // ── Digit ─────────────────────────────────────────────

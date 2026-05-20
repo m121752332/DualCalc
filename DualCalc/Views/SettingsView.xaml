@@ -15,11 +15,15 @@
                            Style="{ThemeResource SubtitleTextBlockStyle}"/>
 
                 <RadioButton Content="{x:Bind ViewModel.Loc.Settings_ZhHant, Mode=OneWay}"
-                             IsChecked="{x:Bind ViewModel.IsZhHant, Mode=TwoWay}"
+                             IsChecked="{x:Bind ViewModel.IsZhHant, Mode=OneWay}"
+                             Checked="LangRadioButton_Checked"
+                             Tag="ZhHant"
                              GroupName="LangGroup"/>
 
                 <RadioButton Content="{x:Bind ViewModel.Loc.Settings_ZhHans, Mode=OneWay}"
-                             IsChecked="{x:Bind ViewModel.IsZhHans, Mode=TwoWay}"
+                             IsChecked="{x:Bind ViewModel.IsZhHans, Mode=OneWay}"
+                             Checked="LangRadioButton_Checked"
+                             Tag="ZhHans"
                              GroupName="LangGroup"/>
             </StackPanel>
 
@@ -31,15 +35,21 @@
                            Style="{ThemeResource SubtitleTextBlockStyle}"/>
 
                 <RadioButton Content="{x:Bind ViewModel.Loc.Settings_ThemeSystem, Mode=OneWay}"
-                             IsChecked="{x:Bind ViewModel.IsThemeSystem, Mode=TwoWay}"
+                             IsChecked="{x:Bind ViewModel.IsThemeSystem, Mode=OneWay}"
+                             Checked="ThemeRadioButton_Checked"
+                             Tag="System"
                              GroupName="ThemeGroup"/>
 
                 <RadioButton Content="{x:Bind ViewModel.Loc.Settings_ThemeLight, Mode=OneWay}"
-                             IsChecked="{x:Bind ViewModel.IsThemeLight, Mode=TwoWay}"
+                             IsChecked="{x:Bind ViewModel.IsThemeLight, Mode=OneWay}"
+                             Checked="ThemeRadioButton_Checked"
+                             Tag="Light"
                              GroupName="ThemeGroup"/>
 
                 <RadioButton Content="{x:Bind ViewModel.Loc.Settings_ThemeDark, Mode=OneWay}"
-                             IsChecked="{x:Bind ViewModel.IsThemeDark, Mode=TwoWay}"
+                             IsChecked="{x:Bind ViewModel.IsThemeDark, Mode=OneWay}"
+                             Checked="ThemeRadioButton_Checked"
+                             Tag="Dark"
                              GroupName="ThemeGroup"/>
             </StackPanel>
 

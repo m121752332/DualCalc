@@ -49,6 +49,9 @@ namespace DualCalc.ViewModels
             {
                 OnPropertyChanged(nameof(IsZhHant));
                 OnPropertyChanged(nameof(IsZhHans));
+                
+                // Trigger reload for localization bound strings
+                OnPropertyChanged(nameof(Loc));
             };
             _theme.PropertyChanged += (_, e) =>
             {

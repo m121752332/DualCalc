@@ -3,10 +3,12 @@ using DualCalc.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace DualCalc
 {
-    public sealed partial class MainWindow : Window
+    public sealed partial class MainWindow : Window, INotifyPropertyChanged
     {
         public MainViewModel ViewModel { get; } = new();
         public LocalizationService Loc => LocalizationService.Instance;
@@ -40,6 +42,19 @@ namespace DualCalc
                     });
             };
 
+            Loc.LanguageChanged += (_, _) =>
+            {
+                this.DispatcherQueue.TryEnqueue(() =>
+                {
+                    Bindings.Update();
+                    
+                    // Force NavigationView items to re-render
+                    if (NavCalc.Content is TextBlock tbCalc) tbCalc.Text = Loc.Nav_Calculator;
+                    if (NavSettings.Content is TextBlock tbSettings) tbSettings.Text = Loc.Nav_Settings;
+                    if (NavAbout.Content is TextBlock tbAbout) tbAbout.Text = Loc.Nav_About;
+                });
+            };
+
             // Select Calculator nav item on load
             NavView.SelectedItem = NavCalc;
 
@@ -70,9 +85,10 @@ namespace DualCalc
         public Visibility BoolToVisibility(bool value)
             => value ? Visibility.Visible : Visibility.Collapsed;
 
-        // ── INotifyPropertyChanged (for x:Bind) ──────────────
-        public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
-        private void OnPropertyChanged(string name)
-            => PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(name));
+        public event PropertyChangedEventHandler? PropertyChanged;
+        private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

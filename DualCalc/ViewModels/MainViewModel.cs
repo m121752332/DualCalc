@@ -9,6 +9,14 @@ namespace DualCalc.ViewModels
         public CalculatorViewModel CalcA { get; } = new("A");
         public CalculatorViewModel CalcB { get; } = new("B");
 
+        public MainViewModel()
+        {
+            DualCalc.Services.LocalizationService.Instance.LanguageChanged += (_, _) =>
+            {
+                OnPropertyChanged(nameof(DualModeTooltip));
+            };
+        }
+
         // ── Dual mode toggle ──────────────────────────────────
         private bool _isDualMode = true;
         public bool IsDualMode
@@ -25,7 +33,7 @@ namespace DualCalc.ViewModels
         }
 
         public string DualModeIcon    => _isDualMode ? "\uE923" : "\uE922"; // WinUI grid icons
-        public string DualModeTooltip => _isDualMode ? "關閉雙欄模式" : "開啟雙欄模式";
+        public string DualModeTooltip => _isDualMode ? DualCalc.Services.LocalizationService.Instance.DualMode_Toggle : DualCalc.Services.LocalizationService.Instance.DualMode_Toggle; 
 
         public void ToggleDualMode() => IsDualMode = !IsDualMode;
 
