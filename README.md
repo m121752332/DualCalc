@@ -91,7 +91,25 @@ DualCalc/
 - [x] Phase 1 — 專案架構 + CalculatorEngine + 所有 ViewModel / Service
 - [ ] Phase 2 — UI 細節調整 + 動畫
 - [ ] Phase 3 — 鍵盤輸入支援
-- [ ] Phase 4 — 打包發布
+- [x] Phase 4 — 打包發布
+
+---
+
+## 打包發布
+
+本專案支援將應用程式打包成乾淨的單一獨立執行檔（包含一切相依性，只需 `.exe` 原地執行），並支援 x64 與 arm64 兩種架構。
+
+只要在命令列或 PowerShell 中執行已經撰寫好的打包腳本即可：
+
+```powershell
+.\publish.ps1
+```
+
+執行後會自動清理 `bin` / `obj`，並產出打包檔案至：
+- **x64:** `DualCalc\bin\Release\net10.0-windows10.0.19041.0\win-x64\publish\`
+- **arm64:** `DualCalc\bin\Release\net10.0-windows10.0.19041.0\win-arm64\publish\`
+
+請記得將打包產出的 `DualCalc.exe` 與根目錄的 `config.yaml` 放在相同的目錄層級進行散佈發布，確保應用程式能正確讀取初始配置。若仍出現讀取問題，程式會跳出彈窗提示錯誤原因。
 
 ---
 

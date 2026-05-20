@@ -6,14 +6,17 @@ calc:
   # The default width of a single calculator window. 
   # If Dual Mode is off, window is this wide. If on, window is (this * 2).
   # 單一區塊的預設寬度。雙開時將會變成預設寬度 * 2。
-  defaultAppWidth: 370
+  # default:380
+  defaultAppWidth: 380
 
   # The default height of the window.
   # 視窗的預設高度。
+  # default:700
   defaultAppHeight: 700
 
   # Default state of Dual Mode on startup.
   # 啟動時是否預設開啟雙視窗模式。
+  # default:true
   isDualModeOnStartup: true
 
 # Setting Configuration (全域設定)

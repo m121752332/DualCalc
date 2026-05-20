@@ -30,7 +30,14 @@ namespace DualCalc
 
             // Re-apply if it loaded before content was ready
             this.Activated += (s, e) => ThemeService.Instance.Apply();
-            
+
+            // Show config load error if any whenever Content is loaded
+            var rootElement = this.Content as FrameworkElement;
+            if (rootElement != null)
+            {
+                rootElement.Loaded += MainWindow_Loaded;
+            }
+
             // Notify DualColumnWidth when IsDualMode changes
             ViewModel.PropertyChanged += (_, e) =>
             {
@@ -96,6 +103,24 @@ namespace DualCalc
                     case "Settings":   SettingsPage.Visibility = Visibility.Visible; break;
                     case "About":      AboutPage.Visibility    = Visibility.Visible; break;
                 }
+            }
+        }
+
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(ConfigService.LastLoadError))
+            {
+                var dialog = new ContentDialog
+                {
+                    Title = "Config Load Error",
+                    Content = ConfigService.LastLoadError,
+                    CloseButtonText = "OK",
+                    XamlRoot = this.Content.XamlRoot
+                };
+                await dialog.ShowAsync();
+
+                // Clear the error so it doesn't show again unless we reload
+                ConfigService.LoadConfig(); // Try one more time, silently or handle accordingly, but here we just leave it so it doesn't loop
             }
         }
 
