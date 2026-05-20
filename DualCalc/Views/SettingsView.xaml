@@ -1,0 +1,48 @@
+<Page
+    x:Class="DualCalc.Views.SettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Padding="24,16">
+        <StackPanel Spacing="24" MaxWidth="480">
+
+            <!-- ── Language ── -->
+            <StackPanel Spacing="12">
+                <TextBlock Text="{x:Bind ViewModel.Loc.Settings_Language, Mode=OneWay}"
+                           Style="{ThemeResource SubtitleTextBlockStyle}"/>
+
+                <RadioButton Content="{x:Bind ViewModel.Loc.Settings_ZhHant, Mode=OneWay}"
+                             IsChecked="{x:Bind ViewModel.IsZhHant, Mode=TwoWay}"
+                             GroupName="LangGroup"/>
+
+                <RadioButton Content="{x:Bind ViewModel.Loc.Settings_ZhHans, Mode=OneWay}"
+                             IsChecked="{x:Bind ViewModel.IsZhHans, Mode=TwoWay}"
+                             GroupName="LangGroup"/>
+            </StackPanel>
+
+            <MenuFlyoutSeparator/>
+
+            <!-- ── Theme ── -->
+            <StackPanel Spacing="12">
+                <TextBlock Text="{x:Bind ViewModel.Loc.Settings_Theme, Mode=OneWay}"
+                           Style="{ThemeResource SubtitleTextBlockStyle}"/>
+
+                <RadioButton Content="{x:Bind ViewModel.Loc.Settings_ThemeSystem, Mode=OneWay}"
+                             IsChecked="{x:Bind ViewModel.IsThemeSystem, Mode=TwoWay}"
+                             GroupName="ThemeGroup"/>
+
+                <RadioButton Content="{x:Bind ViewModel.Loc.Settings_ThemeLight, Mode=OneWay}"
+                             IsChecked="{x:Bind ViewModel.IsThemeLight, Mode=TwoWay}"
+                             GroupName="ThemeGroup"/>
+
+                <RadioButton Content="{x:Bind ViewModel.Loc.Settings_ThemeDark, Mode=OneWay}"
+                             IsChecked="{x:Bind ViewModel.IsThemeDark, Mode=TwoWay}"
+                             GroupName="ThemeGroup"/>
+            </StackPanel>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

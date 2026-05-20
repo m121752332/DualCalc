@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter</value></resheader>
+
+  <!-- Navigation -->
+  <data name="Nav_Calculator" xml:space="preserve"><value>計算機</value></data>
+  <data name="Nav_Settings"   xml:space="preserve"><value>配置</value></data>
+  <data name="Nav_About"      xml:space="preserve"><value>關於</value></data>
+
+  <!-- Settings -->
+  <data name="Settings_Language"     xml:space="preserve"><value>語言</value></data>
+  <data name="Settings_ZhHant"       xml:space="preserve"><value>繁體中文</value></data>
+  <data name="Settings_ZhHans"       xml:space="preserve"><value>简体中文</value></data>
+  <data name="Settings_Theme"        xml:space="preserve"><value>介面主題</value></data>
+  <data name="Settings_ThemeSystem"  xml:space="preserve"><value>系統</value></data>
+  <data name="Settings_ThemeLight"   xml:space="preserve"><value>明亮</value></data>
+  <data name="Settings_ThemeDark"    xml:space="preserve"><value>黑暗</value></data>
+
+  <!-- About -->
+  <data name="About_Title"     xml:space="preserve"><value>DualCalc</value></data>
+  <data name="About_Version"   xml:space="preserve"><value>版本 1.0.0</value></data>
+  <data name="About_Frontend"  xml:space="preserve"><value>前端：WinUI 3 / Windows App SDK</value></data>
+  <data name="About_Backend"   xml:space="preserve"><value>後端：C# / .NET 8</value></data>
+  <data name="About_Copyright" xml:space="preserve"><value>© 2026 DualCalc</value></data>
+
+  <!-- Calculator -->
+  <data name="DualMode_Toggle"      xml:space="preserve"><value>雙欄模式</value></data>
+  <data name="Calc_Memory_Clear"    xml:space="preserve"><value>記憶體清除</value></data>
+  <data name="Calc_Memory_Recall"   xml:space="preserve"><value>記憶體讀取</value></data>
+  <data name="Calc_Memory_Add"      xml:space="preserve"><value>記憶體加</value></data>
+  <data name="Calc_Memory_Sub"      xml:space="preserve"><value>記憶體減</value></data>
+  <data name="Calc_Memory_Store"    xml:space="preserve"><value>記憶體儲存</value></data>
+  <data name="Error_DivZero"        xml:space="preserve"><value>除數不可為零</value></data>
+  <data name="Error_Invalid"        xml:space="preserve"><value>無效的輸入</value></data>
+</root>

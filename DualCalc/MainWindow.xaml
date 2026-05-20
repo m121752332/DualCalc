@@ -1,0 +1,128 @@
+<Window
+    x:Class="DualCalc.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DualCalc"
+    xmlns:views="using:DualCalc.Views"
+    xmlns:conv="using:DualCalc.Converters"
+    xmlns:svc="using:DualCalc.Services"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="DualCalc">
+
+    <Window.SystemBackdrop>
+        <MicaBackdrop/>
+    </Window.SystemBackdrop>
+
+    <Grid>
+
+        <NavigationView x:Name="NavView"
+                        PaneDisplayMode="LeftMinimal"
+                        IsBackButtonVisible="Collapsed"
+                        IsSettingsVisible="False"
+                        OpenPaneLength="220"
+                        SelectionChanged="NavView_SelectionChanged">
+
+            <!-- ── Nav Items ── -->
+            <NavigationView.MenuItems>
+                <NavigationViewItem x:Name="NavCalc"
+                                    Tag="Calculator">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE8EF;"/>
+                    </NavigationViewItem.Icon>
+                    <NavigationViewItem.Content>
+                        <TextBlock Text="{x:Bind Loc.Nav_Calculator, Mode=OneWay}"/>
+                    </NavigationViewItem.Content>
+                </NavigationViewItem>
+
+                <NavigationViewItem x:Name="NavSettings"
+                                    Tag="Settings">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE713;"/>
+                    </NavigationViewItem.Icon>
+                    <NavigationViewItem.Content>
+                        <TextBlock Text="{x:Bind Loc.Nav_Settings, Mode=OneWay}"/>
+                    </NavigationViewItem.Content>
+                </NavigationViewItem>
+
+                <NavigationViewItem x:Name="NavAbout"
+                                    Tag="About">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE946;"/>
+                    </NavigationViewItem.Icon>
+                    <NavigationViewItem.Content>
+                        <TextBlock Text="{x:Bind Loc.Nav_About, Mode=OneWay}"/>
+                    </NavigationViewItem.Content>
+                </NavigationViewItem>
+            </NavigationView.MenuItems>
+
+            <!-- ── Header / Toolbar ── -->
+            <NavigationView.Header>
+                <Grid Height="48" Margin="0,-8,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- App title -->
+                    <TextBlock Grid.Column="0"
+                               Text="DualCalc"
+                               Style="{ThemeResource SubtitleTextBlockStyle}"
+                               VerticalAlignment="Center"
+                               Margin="4,0,0,0"/>
+
+                    <!-- Dual mode toggle -->
+                    <ToggleButton Grid.Column="1"
+                                  IsChecked="{x:Bind ViewModel.IsDualMode, Mode=TwoWay}"
+                                  ToolTipService.ToolTip="{x:Bind ViewModel.DualModeTooltip, Mode=OneWay}"
+                                  VerticalAlignment="Center"
+                                  Margin="0,0,8,0"
+                                  Padding="10,6"
+                                  CornerRadius="6">
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <TextBlock Text="A" FontWeight="SemiBold" FontSize="13"/>
+                            <TextBlock Text="|" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="13"/>
+                            <TextBlock Text="B" FontWeight="SemiBold" FontSize="13"/>
+                        </StackPanel>
+                    </ToggleButton>
+                </Grid>
+            </NavigationView.Header>
+
+            <!-- ── Content Area ── -->
+            <Grid x:Name="ContentArea">
+
+                <!-- ── Calculator Page ── -->
+                <Grid x:Name="CalcPage" Visibility="Visible">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" MinWidth="320"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="{x:Bind DualColumnWidth, Mode=OneWay}"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Calculator A (always visible) -->
+                    <views:CalculatorView Grid.Column="0"
+                                          x:Name="CalcViewA"/>
+
+                    <!-- Divider -->
+                    <Rectangle Grid.Column="1"
+                                Width="1"
+                                Fill="{ThemeResource DividerStrokeColorDefaultBrush}"
+                                Visibility="{x:Bind BoolToVisibility(ViewModel.IsDualMode), Mode=OneWay}"/>
+
+                    <!-- Calculator B (toggled) -->
+                    <views:CalculatorView Grid.Column="2"
+                                          x:Name="CalcViewB"
+                                          Visibility="{x:Bind BoolToVisibility(ViewModel.IsDualMode), Mode=OneWay}"/>
+                </Grid>
+
+                <!-- ── Settings Page ── -->
+                <views:SettingsView x:Name="SettingsPage" Visibility="Collapsed"/>
+
+                <!-- ── About Page ── -->
+                <views:AboutView x:Name="AboutPage" Visibility="Collapsed"/>
+
+            </Grid>
+        </NavigationView>
+    </Grid>
+</Window>
