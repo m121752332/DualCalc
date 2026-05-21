@@ -5,11 +5,14 @@
 ## 功能特色
 
 - **雙欄模式**：點擊 Toolbar 上的開關，即時展開/收起第二個計算機，並會根據設定自動調整視窗大小，顏色狀態與提示也會動態切換。
+- **主視窗最小尺寸限制**：主框體已加入最小寬高限制，避免使用者將視窗縮得過小導致計算機內容被擠壞；單欄與雙欄模式會套用不同的最小寬度。
 - **配置讀取**：新增 `config.yaml` 支援預設視窗大小與單/雙欄啟動配置，且在配置頁也新增相關對應邏輯。
 - **先乘除後加減**：Shunting-yard 算法，完整支援運算子優先級。
 - **繁簡切換**：配置頁即時切換，所有 UI 文字（包含動態更新的提示）自動連動。
+- **語系代碼對齊**：語言設定已由 `zh-Hant` / `zh-Hans` 統一調整為 `zh-TW` / `zh-CN`，並保留舊設定值的相容讀取。
 - **三種主題**：系統 / 明亮 / 黑暗，即時生效不需重啟。
 - **Memory 功能**：MC / MR / M+ / M− / MS。
+- **關於頁 Logo**：`About` 頁所使用的 `Assets/Logo.jpg` 已納入輸出與發佈流程，避免執行或 publish 後無法顯示。
 
 ---
 
@@ -65,10 +68,43 @@ DualCalc/
 ├── Converters/
 │   └── BoolToVisibilityConverter.cs
 ├── Strings/
-│   ├── zh-Hant/Resources.resw   # 繁體中文
-│   └── zh-Hans/Resources.resw   # 简体中文
+│   ├── zh-TW/Resources.resw     # 繁體中文資源
+│   └── zh-CN/Resources.resw     # 简体中文資源
 └── config.yaml                  # 系統全域應用配置檔
 ```
+
+---
+
+## 本次補充更新
+
+### 1. 語系與配置調整
+
+- `config.yaml` 的預設語言已改為 `zh-TW` / `zh-CN`。
+- `SettingsViewModel`、`LocalizationService`、設定頁語系選項與 `Strings` 資源目錄名稱已同步對齊為 `zh-TW` / `zh-CN`。
+- 為避免升級後舊使用者設定失效，程式仍可讀取舊值 `zh-Hant` / `zh-Hans`，但後續儲存會統一寫回 `zh-TW` / `zh-CN`。
+- 配置頁中的語系選項目前顯示為：
+  - `繁體中文（zh-TW）`
+  - `簡體中文（zh-CN）`
+
+### 2. 打包與發佈補充
+
+- `publish.ps1` 打包流程已驗證可正常輸出 x64 / arm64 單一執行檔。
+- 先前的 PRI 預設語言警告，已透過將專案 `DefaultLanguage` 調整為 `zh-TW` 解決。
+- 先前的 trimming 警告，已透過停用 `PublishTrimmed` 排除，以降低 WinUI / WinRT / YamlDotNet 在發佈後的執行期風險。
+- `Assets/Logo.jpg` 已設定為隨輸出與 publish 一併複製，避免 `About` 頁圖片遺失。
+
+### 3. 主視窗尺寸行為
+
+- 主視窗不再允許被縮到破壞版面的尺寸。
+- 最小高度會依 `config.yaml` 的 `defaultAppHeight` 限制。
+- 最小寬度會依目前模式動態切換：
+  - 單欄模式：以單台計算機配置寬度為下限
+  - 雙欄模式：以雙台計算機配置寬度為下限
+
+### 4. 備註
+
+- README 中部分舊描述若仍提到 `zh-Hant` / `zh-Hans`，應以目前程式實作的 `zh-TW` / `zh-CN` 為準。
+- 目前專案語系切換的實際顯示來源以 `LocalizationService` 內建字典與對應資源鍵為主。
 
 ---
 

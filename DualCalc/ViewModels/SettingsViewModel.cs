@@ -10,16 +10,16 @@ namespace DualCalc.ViewModels
         private readonly ThemeService _theme = ThemeService.Instance;
 
         // ── Language ──────────────────────────────────────────
-        public bool IsZhHant
+        public bool IsZhTw
         {
-            get => _loc.IsZhHant;
-            set { if (value) _loc.Language = AppLanguage.ZhHant; OnPropertyChanged(); }
+            get => _loc.IsZhTw;
+            set { if (value) _loc.Language = AppLanguage.ZhTw; OnPropertyChanged(); }
         }
 
-        public bool IsZhHans
+        public bool IsZhCn
         {
-            get => _loc.IsZhHans;
-            set { if (value) _loc.Language = AppLanguage.ZhHans; OnPropertyChanged(); }
+            get => _loc.IsZhCn;
+            set { if (value) _loc.Language = AppLanguage.ZhCn; OnPropertyChanged(); }
         }
 
         // ── Theme ─────────────────────────────────────────────
@@ -47,8 +47,8 @@ namespace DualCalc.ViewModels
         {
             _loc.LanguageChanged += (_, _) =>
             {
-                OnPropertyChanged(nameof(IsZhHant));
-                OnPropertyChanged(nameof(IsZhHans));
+                OnPropertyChanged(nameof(IsZhTw));
+                OnPropertyChanged(nameof(IsZhCn));
                 
                 // Trigger reload for localization bound strings
                 OnPropertyChanged(nameof(Loc));

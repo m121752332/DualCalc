@@ -13,13 +13,13 @@
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
     <WindowsPackageType>None</WindowsPackageType>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DefaultLanguage>zh-Hant</DefaultLanguage>
+    <DefaultLanguage>zh-TW</DefaultLanguage>
 
     <!-- 瘦身選項：建置為單一檔案 -->
     <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>true</SelfContained>
     <!-- 瘦身選項：啟用剪裁機制移除未使用的框架程式碼 -->
-    <PublishTrimmed>true</PublishTrimmed>
+    <PublishTrimmed>false</PublishTrimmed>
     <!-- 調整剪裁模式為 partial 以避免使用反射（如 WinUI 或 YamlDotNet）時找不到物件 -->
     <TrimMode>partial</TrimMode>
     <EnableMsixTooling>true</EnableMsixTooling>
@@ -29,10 +29,16 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.0.1" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.28000.1839" />
     <Manifest Include="$(ApplicationManifest)" />
+    <PackageReference Include="WinUI3XamlPreview" Version="0.8.2" />
     <PackageReference Include="YamlDotNet" Version="17.1.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Assets\Logo.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

@@ -25,8 +25,8 @@ namespace DualCalc.Views
         {
             if (sender is RadioButton rb && rb.Tag is string tag)
             {
-                if (tag == "ZhHant") ViewModel.IsZhHant = true;
-                else if (tag == "ZhHans") ViewModel.IsZhHans = true;
+                if (tag == "ZhTw") ViewModel.IsZhTw = true;
+                else if (tag == "ZhCn") ViewModel.IsZhCn = true;
             }
         }
 

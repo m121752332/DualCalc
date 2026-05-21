@@ -6,11 +6,14 @@ namespace DualCalc.ViewModels
     public class MainViewModel : INotifyPropertyChanged
     {
         // ── Two calculator instances ──────────────────────────
-        public CalculatorViewModel CalcA { get; } = new(CalculatorIdentifier.Left);
-        public CalculatorViewModel CalcB { get; } = new(CalculatorIdentifier.Right);
+        public CalculatorViewModel CalcA { get; }
+        public CalculatorViewModel CalcB { get; }
 
         public MainViewModel()
         {
+            CalcA = new CalculatorViewModel(CalculatorIdentifier.Left) { MainViewModel = this };
+            CalcB = new CalculatorViewModel(CalculatorIdentifier.Right) { MainViewModel = this };
+
             DualCalc.Services.LocalizationService.Instance.LanguageChanged += (_, _) =>
             {
                 OnPropertyChanged(nameof(DualModeTooltip));

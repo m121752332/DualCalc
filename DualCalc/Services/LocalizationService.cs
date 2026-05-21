@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace DualCalc.Services
 {
-    public enum AppLanguage { ZhHant, ZhHans }
+    public enum AppLanguage { ZhTw, ZhCn }
 
     /// <summary>
     /// 語言切換服務：繁體 / 簡體，即時連動 UI
@@ -16,14 +16,14 @@ namespace DualCalc.Services
         // ── Singleton ─────────────────────────────────────────
         public static LocalizationService Instance { get; } = new();
 
-        private static readonly IReadOnlyDictionary<string, string> ZhHantResources = new Dictionary<string, string>
+        private static readonly IReadOnlyDictionary<string, string> ZhTwResources = new Dictionary<string, string>
         {
             ["Nav_Calculator"] = "計算機",
             ["Nav_Settings"] = "配置",
             ["Nav_About"] = "關於",
             ["Settings_Language"] = "語言",
-            ["Settings_ZhHant"] = "繁體中文",
-            ["Settings_ZhHans"] = "简体中文",
+            ["Settings_ZhTw"] = "繁體中文（zh-TW）",
+            ["Settings_ZhCn"] = "簡體中文（zh-CN）",
             ["Settings_Theme"] = "介面主題",
             ["Settings_ThemeSystem"] = "系統",
             ["Settings_ThemeLight"] = "明亮",
@@ -47,14 +47,14 @@ namespace DualCalc.Services
             ["Error_Invalid"] = "無效的輸入"
         };
 
-        private static readonly IReadOnlyDictionary<string, string> ZhHansResources = new Dictionary<string, string>
+        private static readonly IReadOnlyDictionary<string, string> ZhCnResources = new Dictionary<string, string>
         {
             ["Nav_Calculator"] = "计算器",
             ["Nav_Settings"] = "配置",
             ["Nav_About"] = "关于",
             ["Settings_Language"] = "语言",
-            ["Settings_ZhHant"] = "繁體中文",
-            ["Settings_ZhHans"] = "简体中文",
+            ["Settings_ZhTw"] = "繁體中文（zh-TW）",
+            ["Settings_ZhCn"] = "简体中文（zh-CN）",
             ["Settings_Theme"] = "界面主题",
             ["Settings_ThemeSystem"] = "系统",
             ["Settings_ThemeLight"] = "明亮",
@@ -86,19 +86,20 @@ namespace DualCalc.Services
             if (!File.Exists(_settingsFile))
             {
                 var defaultLang = ConfigService.Instance.Setting.Language;
-                if (defaultLang == "zh-Hans")
+                if (string.Equals(defaultLang, "zh-CN", StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(defaultLang, "zh-Hans", StringComparison.OrdinalIgnoreCase))
                 {
-                    _language = AppLanguage.ZhHans;
+                    _language = AppLanguage.ZhCn;
                 }
                 else
                 {
-                    _language = AppLanguage.ZhHant; // fallback to zh-Hant or config value
+                    _language = AppLanguage.ZhTw;
                 }
             }
         }
 
         // ── State ─────────────────────────────────────────────
-        private AppLanguage _language = AppLanguage.ZhHant;
+        private AppLanguage _language = AppLanguage.ZhTw;
         public AppLanguage Language
         {
             get => _language;
@@ -108,22 +109,22 @@ namespace DualCalc.Services
                 _language = value;
                 Save();
                 OnPropertyChanged();
-                OnPropertyChanged(nameof(IsZhHant));
-                OnPropertyChanged(nameof(IsZhHans));
+                OnPropertyChanged(nameof(IsZhTw));
+                OnPropertyChanged(nameof(IsZhCn));
                 NotifyAllStrings();
                 LanguageChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
-        public bool IsZhHant => _language == AppLanguage.ZhHant;
-        public bool IsZhHans => _language == AppLanguage.ZhHans;
+        public bool IsZhTw => _language == AppLanguage.ZhTw;
+        public bool IsZhCn => _language == AppLanguage.ZhCn;
 
         public event EventHandler? LanguageChanged;
 
         // ── Resource lookup ───────────────────────────────────
         public string Get(string key)
         {
-            var resources = _language == AppLanguage.ZhHant ? ZhHantResources : ZhHansResources;
+            var resources = _language == AppLanguage.ZhTw ? ZhTwResources : ZhCnResources;
             return resources.TryGetValue(key, out var value) ? value : key;
         }
 
@@ -133,8 +134,8 @@ namespace DualCalc.Services
         public string Nav_Settings   => Get("Nav_Settings");
         public string Nav_About      => Get("Nav_About");
         public string Settings_Language     => Get("Settings_Language");
-        public string Settings_ZhHant       => Get("Settings_ZhHant");
-        public string Settings_ZhHans       => Get("Settings_ZhHans");
+        public string Settings_ZhTw         => Get("Settings_ZhTw");
+        public string Settings_ZhCn         => Get("Settings_ZhCn");
         public string Settings_Theme        => Get("Settings_Theme");
         public string Settings_ThemeSystem  => Get("Settings_ThemeSystem");
         public string Settings_ThemeLight   => Get("Settings_ThemeLight");
@@ -164,8 +165,8 @@ namespace DualCalc.Services
             OnPropertyChanged(nameof(Nav_Settings));
             OnPropertyChanged(nameof(Nav_About));
             OnPropertyChanged(nameof(Settings_Language));
-            OnPropertyChanged(nameof(Settings_ZhHant));
-            OnPropertyChanged(nameof(Settings_ZhHans));
+            OnPropertyChanged(nameof(Settings_ZhTw));
+            OnPropertyChanged(nameof(Settings_ZhCn));
             OnPropertyChanged(nameof(Settings_Theme));
             OnPropertyChanged(nameof(Settings_ThemeSystem));
             OnPropertyChanged(nameof(Settings_ThemeLight));
@@ -202,7 +203,7 @@ namespace DualCalc.Services
                     ? new System.Collections.Generic.List<string>(File.ReadAllLines(_settingsFile))
                     : new System.Collections.Generic.List<string>();
 
-                string entry = $"AppLanguage={(_language == AppLanguage.ZhHant ? "zh-Hant" : "zh-Hans")}";
+                string entry = $"AppLanguage={(_language == AppLanguage.ZhTw ? "zh-TW" : "zh-CN")}";
                 int idx = lines.FindIndex(l => l.StartsWith("AppLanguage="));
                 if (idx >= 0) lines[idx] = entry;
                 else lines.Add(entry);
@@ -224,7 +225,10 @@ namespace DualCalc.Services
                         if (line.StartsWith("AppLanguage="))
                         {
                             var stored = line["AppLanguage=".Length..].Trim();
-                            _language = stored == "zh-Hans" ? AppLanguage.ZhHans : AppLanguage.ZhHant;
+                            _language = string.Equals(stored, "zh-CN", StringComparison.OrdinalIgnoreCase)
+                                || string.Equals(stored, "zh-Hans", StringComparison.OrdinalIgnoreCase)
+                                ? AppLanguage.ZhCn
+                                : AppLanguage.ZhTw;
                         }
                     }
                 }

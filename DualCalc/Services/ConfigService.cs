@@ -15,14 +15,14 @@ namespace DualCalc.Services
         public int DefaultAppWidth { get; set; } = 380;
         public int DefaultAppHeight { get; set; } = 700;
         public bool IsDualModeOnStartup { get; set; } = true;
-        public int DefaultButtonFontSize { get; set; } = 18;
-        public int DefaultFuncButtonFontSize { get; set; } = 14;
-        public int DefaultMemButtonFontSize { get; set; } = 12;
+        public int DefaultButtonFontSize { get; set; } = 24;
+        public int DefaultFuncButtonFontSize { get; set; } = 24;
+        public int DefaultMemButtonFontSize { get; set; } = 14;
     }
 
     public class SettingConfig
     {
-        public string Language { get; set; } = "zh-Hant";
+        public string Language { get; set; } = "zh-TW";
         public string Theme { get; set; } = "System";
     }
 

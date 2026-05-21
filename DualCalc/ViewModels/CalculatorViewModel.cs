@@ -81,6 +81,9 @@ namespace DualCalc.ViewModels
         public int FuncButtonFontSize => DualCalc.Services.ConfigService.Instance.Calc.DefaultFuncButtonFontSize;
         public int MemButtonFontSize => DualCalc.Services.ConfigService.Instance.Calc.DefaultMemButtonFontSize;
 
+        // Reference to MainViewModel for binding dual mode toggle in CalculatorView
+        public MainViewModel? MainViewModel { get; set; }
+
         public CalculatorViewModel(CalculatorIdentifier identifier = CalculatorIdentifier.Single)
         {
             _identifier = identifier; 

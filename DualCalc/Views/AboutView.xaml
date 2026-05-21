@@ -10,21 +10,17 @@
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <StackPanel Spacing="16" HorizontalAlignment="Center">
 
-            <!-- App Icon placeholder -->
-            <Border Width="72" Height="72"
-                    CornerRadius="16"
-                    Background="#0078D4"
-                    HorizontalAlignment="Center">
-                <TextBlock Text="⊞" FontSize="36"
-                           Foreground="White"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"/>
-            </Border>
+            <!-- App Icon -->
+            <Image Source="ms-appx:///Assets/Logo.jpg" 
+                   Width="200" Height="200" 
+                   Stretch="Uniform" 
+                   HorizontalAlignment="Center" />
 
             <!-- App Name -->
             <TextBlock Text="{x:Bind Loc.About_Title, Mode=OneWay}"
                        Style="{ThemeResource TitleTextBlockStyle}"
-                       HorizontalAlignment="Center"/>
+                       HorizontalAlignment="Center"
+                       Visibility="Collapsed" />
 
             <!-- Version -->
             <TextBlock Text="{x:Bind Loc.About_Version, Mode=OneWay}"

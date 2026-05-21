@@ -12,8 +12,8 @@
 
   <!-- Settings -->
   <data name="Settings_Language"     xml:space="preserve"><value>语言</value></data>
-  <data name="Settings_ZhHant"       xml:space="preserve"><value>繁體中文</value></data>
-  <data name="Settings_ZhHans"       xml:space="preserve"><value>简体中文</value></data>
+  <data name="Settings_ZhTw"         xml:space="preserve"><value>繁体中文（zh-TW）</value></data>
+  <data name="Settings_ZhCn"         xml:space="preserve"><value>简体中文（zh-CN）</value></data>
   <data name="Settings_Theme"        xml:space="preserve"><value>界面主题</value></data>
   <data name="Settings_ThemeSystem"  xml:space="preserve"><value>系统</value></data>
   <data name="Settings_ThemeLight"   xml:space="preserve"><value>明亮</value></data>

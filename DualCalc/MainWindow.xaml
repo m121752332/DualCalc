@@ -72,19 +72,6 @@
                                VerticalAlignment="Center"
                                Margin="4,0,0,0"/>
 
-                    <!-- Dual mode toggle -->
-                    <ToggleButton Grid.Column="1"
-                                  IsChecked="{x:Bind ViewModel.IsDualMode, Mode=TwoWay}"
-                                  ToolTipService.ToolTip="{x:Bind ViewModel.DualModeTooltip, Mode=OneWay}"
-                                  Background="{x:Bind ViewModel.DualModeToggleBackground, Mode=OneWay}"
-                                  VerticalAlignment="Center"
-                                  Margin="0,0,8,0"
-                                  Padding="10,6"
-                                  CornerRadius="6">
-                        <StackPanel Orientation="Horizontal" Spacing="6">
-                            <TextBlock Text="{x:Bind ViewModel.DualModeTooltip, Mode=OneWay}" FontWeight="SemiBold" FontSize="13"/>
-                        </StackPanel>
-                    </ToggleButton>
                 </Grid>
             </NavigationView.Header>
 
@@ -93,24 +80,44 @@
 
                 <!-- ── Calculator Page ── -->
                 <Grid x:Name="CalcPage" Visibility="Visible">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" MinWidth="320"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="{x:Bind DualColumnWidth, Mode=OneWay}"/>
                     </Grid.ColumnDefinitions>
 
+                    <Grid Grid.Row="0" Grid.ColumnSpan="3" Height="40" Background="Transparent" Margin="0,0,0,8">
+                        <ToggleButton HorizontalAlignment="Right"
+                                      IsChecked="{x:Bind ViewModel.IsDualMode, Mode=TwoWay}"
+                                      ToolTipService.ToolTip="{x:Bind ViewModel.DualModeTooltip, Mode=OneWay}"
+                                      Background="{x:Bind ViewModel.DualModeToggleBackground, Mode=OneWay}"
+                                      VerticalAlignment="Center"
+                                      Margin="0,0,8,0"
+                                      Padding="10,6"
+                                      CornerRadius="6">
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <TextBlock Text="{x:Bind ViewModel.DualModeTooltip, Mode=OneWay}" FontWeight="SemiBold" FontSize="13"/>
+                            </StackPanel>
+                        </ToggleButton>
+                    </Grid>
+
                     <!-- Calculator A (always visible) -->
-                    <views:CalculatorView Grid.Column="0"
+                    <views:CalculatorView Grid.Row="1" Grid.Column="0"
                                           x:Name="CalcViewA"/>
 
                     <!-- Divider -->
-                    <Rectangle Grid.Column="1"
+                    <Rectangle Grid.Row="1" Grid.Column="1"
                                 Width="1"
                                 Fill="{ThemeResource DividerStrokeColorDefaultBrush}"
                                 Visibility="{x:Bind BoolToVisibility(ViewModel.IsDualMode), Mode=OneWay}"/>
 
                     <!-- Calculator B (toggled) -->
-                    <views:CalculatorView Grid.Column="2"
+                    <views:CalculatorView Grid.Row="1" Grid.Column="2"
                                           x:Name="CalcViewB"
                                           Visibility="{x:Bind BoolToVisibility(ViewModel.IsDualMode), Mode=OneWay}"/>
                 </Grid>
