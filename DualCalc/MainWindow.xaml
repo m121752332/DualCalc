@@ -16,8 +16,44 @@
     </Window.SystemBackdrop>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- 自訂標題列區域 -->
+        <Grid x:Name="AppTitleBar" Height="40" Grid.Row="0" Background="Transparent">
+            <!-- 將按鈕推向最右邊，這裡設定 HorizontalAlignment="Right" -->
+            <!-- 應用程式標題 -->
+            <TextBlock Text="DualCalc" 
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center" 
+                       Margin="16,0,0,0" 
+                       Style="{ThemeResource CaptionTextBlockStyle}"/>
+
+            <!-- 主題切換按鈕，放在靠右側 (保留 Windows 原生按鈕空間的 Padding) -->
+            <Button x:Name="ThemeButton" 
+                    Content="&#xE706;" 
+                    HorizontalAlignment="Right"
+                    FontFamily="Segoe Fluent Icons"
+                    Click="ThemeButton_Click" 
+                    Background="Transparent" 
+                    BorderThickness="0" 
+                    VerticalAlignment="Top" 
+                    Height="40"
+                    Width="46"
+                    CornerRadius="0"
+                    Margin="0,0,140,0"
+                    ToolTipService.ToolTip="{x:Bind Loc.Nav_Settings, Mode=OneWay}">
+                <Button.Resources>
+                    <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="DodgerBlue"/>
+                    <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="White"/>
+                </Button.Resources>
+            </Button>
+        </Grid>
 
         <NavigationView x:Name="NavView"
+                        Grid.Row="1"
                         PaneDisplayMode="LeftMinimal"
                         IsBackButtonVisible="Collapsed"
                         IsSettingsVisible="False"
@@ -64,14 +100,6 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-
-                    <!-- App title -->
-                    <TextBlock Grid.Column="0"
-                               Text="DualCalc"
-                               Style="{ThemeResource SubtitleTextBlockStyle}"
-                               VerticalAlignment="Center"
-                               Margin="4,0,0,0"/>
-
                 </Grid>
             </NavigationView.Header>
 
