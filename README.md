@@ -5,14 +5,11 @@
 ## 功能特色
 
 - **雙欄模式**：點擊 Toolbar 上的開關，即時展開/收起第二個計算機，並會根據設定自動調整視窗大小，顏色狀態與提示也會動態切換。
-- **主視窗最小尺寸限制**：主框體已加入最小寬高限制，避免使用者將視窗縮得過小導致計算機內容被擠壞；單欄與雙欄模式會套用不同的最小寬度。
 - **配置讀取**：新增 `config.yaml` 支援預設視窗大小與單/雙欄啟動配置，且在配置頁也新增相關對應邏輯。
 - **先乘除後加減**：Shunting-yard 算法，完整支援運算子優先級。
-- **繁簡切換**：配置頁即時切換，所有 UI 文字（包含動態更新的提示）自動連動。
-- **語系代碼對齊**：語言設定已由 `zh-Hant` / `zh-Hans` 統一調整為 `zh-TW` / `zh-CN`，並保留舊設定值的相容讀取。
+- **語系切換**：配置頁即時切換，所有 UI 文字（包含動態更新的提示）自動連動。
 - **三種主題**：系統 / 明亮 / 黑暗，即時生效不需重啟。
 - **Memory 功能**：MC / MR / M+ / M− / MS。
-- **關於頁 Logo**：`About` 頁所使用的 `Assets/Logo.jpg` 已納入輸出與發佈流程，避免執行或 publish 後無法顯示。
 
 ---
 
@@ -39,7 +36,7 @@
 git clone https://github.com/m121752332/DualCalc.git
 cd DualCalc
 
-# 2. 用 Visual Studio 2022 開啟
+# 2. 用 Visual Studio 2022 或 Visual Studio 2026 開啟
 #    開啟 DualCalc.sln
 
 # 3. 選擇平台 x64 → 執行 (F5)
@@ -67,11 +64,20 @@ DualCalc/
 │   └── ThemeService.cs          # 主題切換服務
 ├── Converters/
 │   └── BoolToVisibilityConverter.cs
-├── Strings/
-│   ├── zh-TW/Resources.resw     # 繁體中文資源
-│   └── zh-CN/Resources.resw     # 简体中文資源
+├── i18n/
+│   ├── en-US.json               # 英文語系字典
+│   ├── ja-JP.json               # 日文語系字典
+│   ├── zh-CN.json               # 簡體中文語系字典
+│   └── zh-TW.json               # 繁體中文語系字典
 └── config.yaml                  # 系統全域應用配置檔
 ```
+
+---
+
+## 更新日誌 (Changelog)
+
+詳細的異動紀錄（包含新功能與優化項目）已移至獨立文件管理，請參閱：
+👉 **[docs/Changelog.md](docs/Changelog.md)**
 
 ---
 
@@ -79,12 +85,14 @@ DualCalc/
 
 ### 1. 語系與配置調整
 
-- `config.yaml` 的預設語言已改為 `zh-TW` / `zh-CN`。
-- `SettingsViewModel`、`LocalizationService`、設定頁語系選項與 `Strings` 資源目錄名稱已同步對齊為 `zh-TW` / `zh-CN`。
-- 為避免升級後舊使用者設定失效，程式仍可讀取舊值 `zh-Hant` / `zh-Hans`，但後續儲存會統一寫回 `zh-TW` / `zh-CN`。
+- 專案已全面調整語系架構，由原本的 `.resw` 資源檔遷移至 `DualCalc/i18n/*.json` 的字典讀取機制。
+- 支援了「繁體中文（zh-TW）」、「簡體中文（zh-CN）」、「英文（en-US）」以及「日文（ja-JP）」四種語言介面。
+- `config.yaml` 的預設語言已改為新架構支援的名稱，並維持對外設定值的保存一致性。
 - 配置頁中的語系選項目前顯示為：
   - `繁體中文（zh-TW）`
   - `簡體中文（zh-CN）`
+  - `英文（en-US）`
+  - `日文（ja-JP）`
 
 ### 2. 打包與發佈補充
 
@@ -103,8 +111,7 @@ DualCalc/
 
 ### 4. 備註
 
-- README 中部分舊描述若仍提到 `zh-Hant` / `zh-Hans`，應以目前程式實作的 `zh-TW` / `zh-CN` 為準。
-- 目前專案語系切換的實際顯示來源以 `LocalizationService` 內建字典與對應資源鍵為主。
+- 目前專案語系切換的實際顯示來源為 `LocalizationService` 讀取 `i18n` 目錄下的 JSON 字典檔案為主，若讀取失敗則會有防錯機制或介面上的 Error InfoBar 提示。
 
 ---
 
@@ -117,7 +124,7 @@ DualCalc/
 | **架構** | MVVM + x:Bind |
 | **計算引擎** | Shunting-yard Algorithm |
 | **主題** | Mica Backdrop + ElementTheme |
-| **本地化** | .resw ResourceLoader |
+| **本地化** | JSON 多語系架構 |
 | **配置檔** | YamlDotNet |
 
 ---
@@ -125,7 +132,7 @@ DualCalc/
 ## 開發里程碑
 
 - [x] Phase 1 — 專案架構 + CalculatorEngine + 所有 ViewModel / Service
-- [ ] Phase 2 — UI 細節調整 + 動畫
+- [x] Phase 2 — UI 細節調整 + 動畫
 - [ ] Phase 3 — 鍵盤輸入支援
 - [x] Phase 4 — 打包發布
 
@@ -142,6 +149,7 @@ DualCalc/
 ```
 
 執行後會自動清理 `bin` / `obj`，並產出打包檔案至：
+
 - **x64:** `DualCalc\bin\Release\net10.0-windows10.0.19041.0\win-x64\publish\`
 - **arm64:** `DualCalc\bin\Release\net10.0-windows10.0.19041.0\win-arm64\publish\`
 

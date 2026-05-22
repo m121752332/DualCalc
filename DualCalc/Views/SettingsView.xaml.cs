@@ -27,6 +27,8 @@ namespace DualCalc.Views
             {
                 if (tag == "ZhTw") ViewModel.IsZhTw = true;
                 else if (tag == "ZhCn") ViewModel.IsZhCn = true;
+                else if (tag == "EnUs") ViewModel.IsEnUs = true;
+                else if (tag == "JaJp") ViewModel.IsJaJp = true;
             }
         }
 

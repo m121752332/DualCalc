@@ -9,6 +9,11 @@
     <ScrollViewer Padding="24,16">
         <StackPanel Spacing="24" MaxWidth="800">
 
+            <InfoBar IsOpen="{x:Bind ViewModel.HasLocalizationError, Mode=OneWay}"
+                     Severity="Warning"
+                     Title="語系檔案載入失敗"
+                     Message="{x:Bind ViewModel.LocalizationLoadError, Mode=OneWay}" />
+
             <!-- ── Title ── -->
             <TextBlock Text="{x:Bind ViewModel.Loc.Nav_Settings, Mode=OneWay}"
                        Style="{ThemeResource TitleTextBlockStyle}"
@@ -40,6 +45,18 @@
                                      IsChecked="{x:Bind ViewModel.IsZhCn, Mode=OneWay}"
                                      Checked="LangRadioButton_Checked"
                                      Tag="ZhCn"
+                                     GroupName="LangGroup"/>
+
+                        <RadioButton Content="{x:Bind ViewModel.Loc.Settings_EnUs, Mode=OneWay}"
+                                     IsChecked="{x:Bind ViewModel.IsEnUs, Mode=OneWay}"
+                                     Checked="LangRadioButton_Checked"
+                                     Tag="EnUs"
+                                     GroupName="LangGroup"/>
+
+                        <RadioButton Content="{x:Bind ViewModel.Loc.Settings_JaJp, Mode=OneWay}"
+                                     IsChecked="{x:Bind ViewModel.IsJaJp, Mode=OneWay}"
+                                     Checked="LangRadioButton_Checked"
+                                     Tag="JaJp"
                                      GroupName="LangGroup"/>
                     </StackPanel>
                 </Expander.Content>

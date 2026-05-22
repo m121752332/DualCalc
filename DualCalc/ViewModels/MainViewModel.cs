@@ -55,8 +55,13 @@ namespace DualCalc.ViewModels
 
         // Button dynamic coloring based on dual mode 
         public Microsoft.UI.Xaml.Media.SolidColorBrush DualModeToggleBackground => _isDualMode 
-            ? new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Transparent) // Default background for transparent 
-            : new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.SeaGreen); 
+            ? new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.DodgerBlue)
+            : new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Green); 
+
+        public void NotifyDualModeToggleBackgroundChanged()
+        {
+            OnPropertyChanged(nameof(DualModeToggleBackground));
+        }
 
         public void ToggleDualMode() => IsDualMode = !IsDualMode;
 

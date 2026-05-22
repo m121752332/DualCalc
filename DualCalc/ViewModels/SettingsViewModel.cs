@@ -22,6 +22,18 @@ namespace DualCalc.ViewModels
             set { if (value) _loc.Language = AppLanguage.ZhCn; OnPropertyChanged(); }
         }
 
+        public bool IsEnUs
+        {
+            get => _loc.IsEnUs;
+            set { if (value) _loc.Language = AppLanguage.EnUs; OnPropertyChanged(); }
+        }
+
+        public bool IsJaJp
+        {
+            get => _loc.IsJaJp;
+            set { if (value) _loc.Language = AppLanguage.JaJp; OnPropertyChanged(); }
+        }
+
         // ── Theme ─────────────────────────────────────────────
         public bool IsThemeSystem
         {
@@ -41,6 +53,9 @@ namespace DualCalc.ViewModels
             set { if (value) _theme.Theme = AppTheme.Dark; OnPropertyChanged(); }
         }
 
+        public string LocalizationLoadError => LocalizationService.LastLoadError;
+        public bool HasLocalizationError => !string.IsNullOrEmpty(LocalizationLoadError);
+
         public LocalizationService Loc => _loc;
 
         public SettingsViewModel()
@@ -49,9 +64,13 @@ namespace DualCalc.ViewModels
             {
                 OnPropertyChanged(nameof(IsZhTw));
                 OnPropertyChanged(nameof(IsZhCn));
-                
+                OnPropertyChanged(nameof(IsEnUs));
+                OnPropertyChanged(nameof(IsJaJp));
+
                 // Trigger reload for localization bound strings
                 OnPropertyChanged(nameof(Loc));
+                OnPropertyChanged(nameof(LocalizationLoadError));
+                OnPropertyChanged(nameof(HasLocalizationError));
             };
             _theme.PropertyChanged += (_, e) =>
             {

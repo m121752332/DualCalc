@@ -92,18 +92,31 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Row="0" Grid.ColumnSpan="3" Height="40" Background="Transparent" Margin="0,0,0,8">
-                        <ToggleButton HorizontalAlignment="Right"
-                                      IsChecked="{x:Bind ViewModel.IsDualMode, Mode=TwoWay}"
-                                      ToolTipService.ToolTip="{x:Bind ViewModel.DualModeTooltip, Mode=OneWay}"
-                                      Background="{x:Bind ViewModel.DualModeToggleBackground, Mode=OneWay}"
-                                      VerticalAlignment="Center"
-                                      Margin="0,0,8,0"
-                                      Padding="10,6"
-                                      CornerRadius="6">
-                            <StackPanel Orientation="Horizontal" Spacing="6">
-                                <TextBlock Text="{x:Bind ViewModel.DualModeTooltip, Mode=OneWay}" FontWeight="SemiBold" FontSize="13"/>
-                            </StackPanel>
-                        </ToggleButton>
+                        <Border HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Margin="0,0,8,0"
+                                Background="{x:Bind ViewModel.DualModeToggleBackground, Mode=OneWay}"
+                                CornerRadius="6">
+                            <ToggleButton IsChecked="{x:Bind ViewModel.IsDualMode, Mode=TwoWay}"
+                                          ToolTipService.ToolTip="{x:Bind ViewModel.DualModeTooltip, Mode=OneWay}"
+                                          Background="Transparent"
+                                          BorderThickness="0"
+                                          Padding="10,6"
+                                          CornerRadius="6">
+                                <ToggleButton.Resources>
+                                    <SolidColorBrush x:Key="ToggleButtonBackgroundPointerOver" Color="#2AAFFFFF"/>
+                                    <SolidColorBrush x:Key="ToggleButtonBackgroundPressed" Color="#40FFFFFF"/>
+                                    <SolidColorBrush x:Key="ToggleButtonBackgroundChecked" Color="Transparent"/>
+                                    <SolidColorBrush x:Key="ToggleButtonBackgroundCheckedPointerOver" Color="#2AAFFFFF"/>
+                                    <SolidColorBrush x:Key="ToggleButtonBackgroundCheckedPressed" Color="#40FFFFFF"/>
+                                    <SolidColorBrush x:Key="ToggleButtonBorderBrushChecked" Color="Transparent"/>
+                                </ToggleButton.Resources>
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <!-- Use White foreground to keep it visible on both Blue and Green background -->
+                                    <TextBlock Text="{x:Bind ViewModel.DualModeTooltip, Mode=OneWay}" Foreground="White" FontWeight="SemiBold" FontSize="13"/>
+                                </StackPanel>
+                            </ToggleButton>
+                        </Border>
                     </Grid>
 
                     <!-- Calculator A (always visible) -->
