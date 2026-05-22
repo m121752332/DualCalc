@@ -38,8 +38,10 @@ calc:
 setting:
   # Default Language: 'zh-TW' or 'zh-CN'
   # 預設語系，支援 'zh-TW' (繁體), 'zh-CN' (簡體)
+  # default:zh-TW
   language: zh-TW
 
   # Default Theme: 'Light', 'Dark', or 'System'
   # 預設主題，支援 'Light', 'Dark', 'System'
-  theme: System
+  # default:Dark
+  theme: Dark

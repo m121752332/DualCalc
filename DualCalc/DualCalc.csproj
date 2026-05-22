@@ -57,4 +57,5 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </None>
   </ItemGroup>
-</Project>
+
+  </Project>

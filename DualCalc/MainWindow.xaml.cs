@@ -34,6 +34,9 @@ namespace DualCalc
         {
             this.InitializeComponent();
 
+            ExtendsContentIntoTitleBar = true;
+            SetTitleBar(AppTitleBar);
+
             // 初始化應用程式的預設寬高，並依據雙台模式設定目前的視窗最小寬度
             _baseMinWidth = ConfigService.Instance.Calc.DefaultAppWidth;
             _baseMinHeight = ConfigService.Instance.Calc.DefaultAppHeight;
@@ -184,6 +187,21 @@ namespace DualCalc
         // ── 提供 XAML 可直接綁定的 Boolean 轉 Visibility Helper 方法 ──
         public Visibility BoolToVisibility(bool value)
             => value ? Visibility.Visible : Visibility.Collapsed;
+
+        private void ThemeButton_Click(object sender, RoutedEventArgs e)
+        {
+            var themeService = ThemeService.Instance;
+            if (themeService.Theme == AppTheme.Dark)
+            {
+                themeService.Theme = AppTheme.Light;
+                ThemeButton.Content = "\uE706";
+            }
+            else
+            {
+                themeService.Theme = AppTheme.Dark;
+                ThemeButton.Content = "\uE708";
+            }
+        }
 
         // ── 提供屬性變化的事件支援（INotifyPropertyChanged） ──
         public event PropertyChangedEventHandler? PropertyChanged;
