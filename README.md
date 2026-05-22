@@ -2,6 +2,9 @@
 
 雙欄對照計算機 — WinUI 3 + C# + Windows App SDK
 
+![Main UI](docs/app_main.png)
+![Settings UI](docs/app_settings.png)
+
 ## 功能特色
 
 - **雙欄模式**：點擊 Toolbar 上的開關，即時展開/收起第二個計算機，並會根據設定自動調整視窗大小，顏色狀態與提示也會動態切換。

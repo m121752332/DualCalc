@@ -2,6 +2,9 @@
 
 Dual-column comparison calculator — WinUI 3 + C# + Windows App SDK
 
+![Main UI](docs/app_main.png)
+![Settings UI](docs/app_settings.png)
+
 ## Features
 
 - **Dual-column mode**: Click the toggle on the toolbar to instantly expand/collapse the second calculator; the window size adjusts automatically based on settings, and color states with hints update dynamically.
