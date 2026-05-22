@@ -12,11 +12,11 @@ namespace DualCalc.Tests
             var vm = new SettingsViewModel();
             var service = LocalizationService.Instance;
 
-            vm.IsZhHans = true;
-            Assert.Equal(AppLanguage.ZhHans, service.Language);
+            vm.IsZhCn = true;
+            Assert.Equal(AppLanguage.ZhCn, service.Language);
 
-            vm.IsZhHant = true;
-            Assert.Equal(AppLanguage.ZhHant, service.Language);
+            vm.IsZhTw = true;
+            Assert.Equal(AppLanguage.ZhTw, service.Language);
         }
 
         [Fact]

@@ -44,4 +44,4 @@ setting:
   # Default Theme: 'Light', 'Dark', or 'System'
   # 預設主題，支援 'Light', 'Dark', 'System'
   # default:Dark
-  theme: Dark
+  theme: System

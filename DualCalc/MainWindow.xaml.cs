@@ -53,6 +53,30 @@ namespace DualCalc
             // 初始化與套用主題服務
             ThemeService.Instance.Initialize((FrameworkElement)this.Content);
 
+            // 訂閱主題變更事件，當主題改變時自動更新按鈕圖標
+            ThemeService.Instance.PropertyChanged += (_, e) =>
+            {
+                if (e.PropertyName == nameof(ThemeService.Theme))
+                {
+                    this.DispatcherQueue.TryEnqueue(UpdateThemeButtonIcon);
+                }
+            };
+
+            // 監聽實際主題變化 (當設定為 System 時，系統切換時會觸發)
+            if (this.Content is FrameworkElement rootElementInit)
+            {
+                rootElementInit.ActualThemeChanged += (_, _) =>
+                {
+                    if (ThemeService.Instance.Theme == AppTheme.System)
+                    {
+                        this.DispatcherQueue.TryEnqueue(UpdateThemeButtonIcon);
+                    }
+                };
+            }
+
+            // 初始化時立即同步按鈕圖標與當前主題
+            UpdateThemeButtonIcon();
+
             // 當畫面因為某些原因載入時重新套用主題
             this.Activated += (s, e) => ThemeService.Instance.Apply();
 
@@ -191,15 +215,42 @@ namespace DualCalc
         private void ThemeButton_Click(object sender, RoutedEventArgs e)
         {
             var themeService = ThemeService.Instance;
-            if (themeService.Theme == AppTheme.Dark)
+            // Toggle theme: Light <-> Dark (如果是 System，則先切換到 Dark)
+            if (themeService.Theme == AppTheme.Light)
+            {
+                themeService.Theme = AppTheme.Dark;
+            }
+            else if (themeService.Theme == AppTheme.Dark)
             {
                 themeService.Theme = AppTheme.Light;
-                ThemeButton.Content = "\uE706";
             }
             else
             {
+                // System 預設切換到 Dark
                 themeService.Theme = AppTheme.Dark;
-                ThemeButton.Content = "\uE708";
+            }
+        }
+
+        private void UpdateThemeButtonIcon()
+        {
+            var currentTheme = ThemeService.Instance.Theme;
+            if (currentTheme == AppTheme.System)
+            {
+                var rootElement = this.Content as FrameworkElement;
+                if (rootElement != null)
+                {
+                    // 根據實際顯示的主題來決定圖標
+                    ThemeButton.Content = rootElement.ActualTheme == ElementTheme.Dark ? "\uE708" : "\uE706";
+                }
+                else
+                {
+                    ThemeButton.Content = "\uE706";
+                }
+            }
+            else
+            {
+                // Dark theme shows moon icon (\uE708), otherwise sun icon (\uE706)
+                ThemeButton.Content = currentTheme == AppTheme.Dark ? "\uE708" : "\uE706";
             }
         }
 

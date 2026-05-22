@@ -33,14 +33,13 @@
 
             <!-- 主題切換按鈕，放在靠右側 (保留 Windows 原生按鈕空間的 Padding) -->
             <Button x:Name="ThemeButton" 
-                    Content="&#xE706;" 
                     HorizontalAlignment="Right"
                     FontFamily="Segoe Fluent Icons"
                     Click="ThemeButton_Click" 
                     Background="Transparent" 
                     BorderThickness="0" 
                     VerticalAlignment="Top" 
-                    Height="40"
+                    Height="30"
                     Width="46"
                     CornerRadius="0"
                     Margin="0,0,140,0"
@@ -120,6 +119,12 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Row="0" Grid.ColumnSpan="3" Height="40" Background="Transparent" Margin="0,0,0,8">
+                        <TextBlock Text="DualCalc" 
+                                   HorizontalAlignment="Left" 
+                                   VerticalAlignment="Center" 
+                                   Margin="12,0,0,0" 
+                                   Style="{ThemeResource TitleTextBlockStyle}"/>
+
                         <Border HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 Margin="0,0,8,0"

@@ -25,40 +25,30 @@
 
 ## 專案結構
 
-```
+```xml
 DualCalc/
-├── CLAUDE.md                        ← 你正在看這裡
-├── DualCalc.sln
-├── README.md
-└── DualCalc/
-    ├── DualCalc.csproj
-    ├── app.manifest
-    ├── App.xaml / App.xaml.cs
-    ├── MainWindow.xaml / .cs        ← 主視窗：NavigationView + 雙欄佈局
-    │
-    ├── Models/
-    │   └── CalculatorEngine.cs      ← 核心計算引擎（Shunting-yard）
-    │
-    ├── ViewModels/
-    │   ├── CalculatorViewModel.cs   ← 單一計算機狀態 + 按鍵邏輯
-    │   ├── MainViewModel.cs         ← 雙欄模式開關 (IsDualMode)
-    │   └── SettingsViewModel.cs     ← 語言 + 主題雙向綁定
-    │
-    ├── Views/
-    │   ├── CalculatorView.xaml/.cs  ← 可重用計算機 UI 元件
-    │   ├── SettingsView.xaml/.cs    ← 配置頁（語言 / 主題）
-    │   └── AboutView.xaml/.cs       ← 關於頁
-    │
-    ├── Services/
-    │   ├── LocalizationService.cs   ← 繁簡切換，Singleton，INotifyPropertyChanged
-    │   └── ThemeService.cs          ← System/Light/Dark 主題，Singleton
-    │
-    ├── Converters/
-    │   └── BoolToVisibilityConverter.cs
-    │
-    └── Strings/
-        ├── zh-Hant/Resources.resw   ← 繁體中文字串資源
-        └── zh-Hans/Resources.resw   ← 简体中文字串資源
+├── Models/
+│   └── CalculatorEngine.cs      # Shunting-yard 計算核心
+├── ViewModels/
+│   ├── CalculatorViewModel.cs   # 單一計算機狀態
+│   ├── MainViewModel.cs         # 雙欄切換邏輯
+│   └── SettingsViewModel.cs     # 語言 + 主題設定
+├── Views/
+│   ├── CalculatorView.xaml      # 計算機 UI 元件
+│   ├── SettingsView.xaml        # 配置頁
+│   └── AboutView.xaml           # 關於頁
+├── Services/
+│   ├── ConfigService.cs         # config.yaml 參數讀取服務
+│   ├── LocalizationService.cs   # 繁簡切換服務
+│   └── ThemeService.cs          # 主題切換服務
+├── Converters/
+│   └── BoolToVisibilityConverter.cs
+├── i18n/
+│   ├── en-US.json               # 英文語系字典
+│   ├── ja-JP.json               # 日文語系字典
+│   ├── zh-CN.json               # 簡體中文語系字典
+│   └── zh-TW.json               # 繁體中文語系字典
+└── config.yaml                  # 系統全域應用配置檔
 ```
 
 ---

@@ -7,7 +7,7 @@
     mc:Ignorable="d">
 
     <ScrollViewer Padding="24,16">
-        <StackPanel Spacing="24" MaxWidth="800">
+        <StackPanel Spacing="24" MaxWidth="800" HorizontalAlignment="Left" Width="800">
 
             <InfoBar IsOpen="{x:Bind ViewModel.HasLocalizationError, Mode=OneWay}"
                      Severity="Warning"
